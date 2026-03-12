@@ -1,0 +1,60 @@
+@page "/proizvodi"
+@rendermode InteractiveServer
+@using BusinessLayer
+@using DataLayer.Model
+@inject IBusiness bus
+
+<h1>Proizvodi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naziv</th>
+            <th>Tip</th>
+            <th>Cena</th>
+            <th>Tezina</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Proizvodi != null)
+        {
+            @foreach (var item in Proizvodi)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Naziv</td>
+                    <td>@item.Tip</td>
+                    <td>@item.CenaRSD</td>
+                    <td>@item.TezinaGrama</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h3>Dodaj proizvod</h3>
+<input placeholder="Naziv" @bind="novi.Naziv" /><br />
+<input placeholder="Tip" @bind="novi.Tip" /><br />
+<input placeholder="Cena" type="number" @bind="novi.CenaRSD" /><br />
+<input placeholder="Tezina (opciono)" type="number" @bind="novi.TezinaGrama" /><br />
+<button @onclick="Dodaj">Dodaj</button>
+<p>@poruka</p>
+
+@code {
+    private List<Proizvod>? Proizvodi { get; set; }
+    private Proizvod novi = new Proizvod();
+    private string poruka = "";
+
+    protected override void OnInitialized()
+    {
+        Proizvodi = bus.GetAllProizvodi();
+    }
+
+    private void Dodaj()
+    {
+        poruka = bus.InsertProizvod(novi);
+        Proizvodi = bus.GetAllProizvodi();
+        novi = new Proizvod();
+    }
+}
