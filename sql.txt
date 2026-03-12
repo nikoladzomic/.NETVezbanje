@@ -1,0 +1,15 @@
+CREATE DATABASE PekaraDB;
+USE PekaraDB;
+
+CREATE TABLE Proizvodi (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Naziv NVARCHAR(50) NOT NULL,
+    Tip NVARCHAR(50) NOT NULL,
+    CenaRSD DECIMAL(10,2) NOT NULL,
+    TezinaGrama DECIMAL NULL
+);
+
+INSERT INTO Proizvodi VALUES ('Hleb beli', 'Hleb', 120.00, 500)
+INSERT INTO Proizvodi VALUES ('Kifla', 'Pecivo', 50.00, 80)
+INSERT INTO Proizvodi VALUES ('Torta cokolada', 'Torta', 2500.00, 1200)
+INSERT INTO Proizvodi VALUES ('Hleb crni', 'Hleb', 150.00, 450)
