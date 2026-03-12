@@ -1,5 +1,7 @@
 // Model/Proizvod.cs
 namespace DataLayer.Model
+builder.Services.AddScoped<IProizvodRepository, ProizvodRepository>();
+builder.Services.AddScoped<IBusiness, Business>();
 {
     public class Proizvod
     {
